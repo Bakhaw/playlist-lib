@@ -27,17 +27,6 @@
 - **Theme Management:** [next-themes](https://github.com/pacocoursey/next-themes)
 - **Icons:** [Lucide React](https://lucide.dev/)
 
-## 📸 Screenshots
-
-### Home Page
-![Home Page](./docs/screenshots/home.png)
-
-### Dashboard
-![Dashboard](./docs/screenshots/dashboard.png)
-
-### Dark Mode
-![Dark Mode](./docs/screenshots/dark-mode.png)
-
 ## 🛠️ Getting Started
 
 ### Prerequisites
@@ -80,9 +69,7 @@ Get these values from your [Supabase Dashboard](https://supabase.com/dashboard) 
 
 - Go to your Supabase project dashboard
 - Navigate to Authentication → URL Configuration
-- Add these redirect URLs:
-  - `http://localhost:3000/auth/callback` (development)
-  - `https://yourdomain.com/auth/callback` (production)
+- Add the redirect URL: `http://localhost:3000/auth/callback`
 
 **Optional: Disable email confirmation for development**
 - Go to Authentication → Providers → Email
@@ -187,23 +174,7 @@ npx shadcn@latest add [component-name]
 
 ## 🚢 Deployment
 
-### Deploy on Vercel (Recommended)
-
-1. Push your code to GitHub
-2. Import your repository on [Vercel](https://vercel.com)
-3. Add environment variables in Vercel dashboard
-4. Deploy!
-
 [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/Bakhaw/playlist-lib)
-
-### Environment Variables for Production
-
-Remember to add these in your deployment platform:
-
-- `NEXT_PUBLIC_SUPABASE_URL`
-- `NEXT_PUBLIC_SUPABASE_ANON_KEY`
-
-Don't forget to update your Supabase redirect URLs with your production domain!
 
 ## 📚 Learn More
 
