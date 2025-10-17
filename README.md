@@ -1,8 +1,34 @@
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
-## Getting Started
+## Features
 
-First, run the development server:
+- 🔐 **Supabase Authentication** - Secure user authentication with email/password and OAuth
+- ⚡ **Next.js 15** - Latest Next.js with App Router
+- ⚛️ **React 19** - Modern React features
+- 🎨 **Tailwind CSS** - Beautiful, responsive UI with dark mode
+- 🔒 **Protected Routes** - Middleware-based route protection
+- 📧 **Email Verification** - Built-in email confirmation workflow
+
+## Quick Setup
+
+### 1. Install Dependencies
+
+```bash
+npm install
+```
+
+### 2. Configure Supabase
+
+Create a `.env.local` file in the root directory:
+
+```env
+NEXT_PUBLIC_SUPABASE_URL=your-project-url
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your-anon-key
+```
+
+📖 **For detailed setup instructions**, see [SETUP.md](./SETUP.md)
+
+### 3. Run the Development Server
 
 ```bash
 npm run dev

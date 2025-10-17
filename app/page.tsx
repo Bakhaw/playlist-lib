@@ -1,103 +1,216 @@
-import Image from "next/image";
+import Link from 'next/link'
+import { createClient } from '@/lib/supabase/server'
+import { redirect } from 'next/navigation'
+import HomeNav from '@/components/HomeNav'
+import { Button } from '@/components/ui/button'
+import { Card } from '@/components/ui/card'
 
-export default function Home() {
+export default async function Home() {
+  const supabase = await createClient()
+
+  const {
+    data: { user },
+  } = await supabase.auth.getUser()
+
+  // If user is already logged in, redirect to dashboard
+  if (user) {
+    redirect('/dashboard')
+  }
+
   return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+    <div className="min-h-screen">
+      {/* Navigation */}
+      <HomeNav />
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+      {/* Hero Section */}
+      <main className="max-w-6xl mx-auto px-8">
+        <div className="pt-20 pb-16 text-center">
+          <h1 className="text-6xl md:text-7xl font-bold mb-6 leading-tight tracking-tight">
+            From notes to playlist.
+            <br />
+            In seconds.
+          </h1>
+          
+          <p className="text-xl text-muted-foreground mb-12 max-w-2xl mx-auto leading-relaxed">
+            Stop manually adding songs one by one. Just copy your playlist from anywhere and paste it here.
+          </p>
+
+          <div className="flex gap-4 justify-center">
+            <Link href="/signup">
+              <Button size="lg" className="shadow-lg">
+                Try it now
+              </Button>
+            </Link>
+          </div>
+        </div>
+
+        {/* Demo Section */}
+        <div className="py-20">
+          <Card className="p-12 shadow-xl">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+              {/* Before */}
+              <div>
+                <div className="mb-4">
+                  <span className="text-xs font-semibold text-muted-foreground uppercase tracking-wide">Before</span>
+                </div>
+                <Card className="p-6 shadow-md">
+                  <div className="text-sm text-muted-foreground mb-3">Notes.app</div>
+                  <div className="space-y-2 font-mono text-sm">
+                    <div>1. Blinding Lights - The Weeknd</div>
+                    <div>2. Levitating - Dua Lipa</div>
+                    <div>3. Save Your Tears - The Weeknd</div>
+                    <div>4. Good 4 U - Olivia Rodrigo</div>
+                    <div>5. Peaches - Justin Bieber</div>
+                  </div>
+                </Card>
+              </div>
+
+              {/* After */}
+              <div>
+                <div className="mb-4">
+                  <span className="text-xs font-semibold text-muted-foreground uppercase tracking-wide">After</span>
+                </div>
+                <Card className="p-6 shadow-md">
+                  <div className="flex items-center justify-between mb-4">
+                    <div className="text-sm font-semibold">Summer Vibes 2024</div>
+                    <div className="text-xs text-muted-foreground">5 songs</div>
+                  </div>
+                  <div className="space-y-3">
+                    {['Blinding Lights', 'Levitating', 'Save Your Tears', 'Good 4 U', 'Peaches'].map((song, i) => (
+                      <div key={i} className="flex items-center gap-3">
+                        <div className="w-10 h-10 bg-muted rounded"></div>
+                        <div className="flex-1">
+                          <div className="text-sm font-medium">{song}</div>
+                          <div className="text-xs text-muted-foreground">Added just now</div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </Card>
+              </div>
+            </div>
+
+            <div className="mt-12 text-center">
+              <div className="inline-flex items-center gap-2 text-sm text-muted-foreground">
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                </svg>
+                <span>Instant playlist creation</span>
+              </div>
+            </div>
+          </Card>
+        </div>
+
+        {/* How It Works */}
+        <div className="py-20">
+          <h2 className="text-3xl font-bold mb-12 text-center">How it works</h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className="text-center">
+              <div className="w-12 h-12 bg-primary text-primary-foreground rounded-xl flex items-center justify-center mx-auto mb-6 shadow-lg">
+                <span className="text-xl font-bold">1</span>
+              </div>
+              <h3 className="text-lg font-semibold mb-3">
+                Copy your list
+              </h3>
+              <p className="text-muted-foreground leading-relaxed">
+                From Notes, Messages, or anywhere. Any format works.
+              </p>
+            </div>
+
+            <div className="text-center">
+              <div className="w-12 h-12 bg-primary text-primary-foreground rounded-xl flex items-center justify-center mx-auto mb-6 shadow-lg">
+                <span className="text-xl font-bold">2</span>
+              </div>
+              <h3 className="text-lg font-semibold mb-3">
+                Paste it here
+              </h3>
+              <p className="text-muted-foreground leading-relaxed">
+                Our AI instantly recognizes songs and artists.
+              </p>
+            </div>
+
+            <div className="text-center">
+              <div className="w-12 h-12 bg-primary text-primary-foreground rounded-xl flex items-center justify-center mx-auto mb-6 shadow-lg">
+                <span className="text-xl font-bold">3</span>
+              </div>
+              <h3 className="text-lg font-semibold mb-3">
+                Done!
+              </h3>
+              <p className="text-muted-foreground leading-relaxed">
+                Your playlist is ready. Share or export anywhere.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        {/* Features */}
+        <div className="py-20 border-t">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+            <div>
+              <h3 className="text-2xl font-bold mb-4">
+                Smart recognition
+              </h3>
+              <p className="text-muted-foreground leading-relaxed mb-6">
+                Paste any format. With numbers, dashes, bullet points, or plain text. 
+                We'll figure it out automatically.
+              </p>
+              <Card className="p-4 font-mono text-sm shadow-inner">
+                <div>• Radiohead - Creep</div>
+                <div>2) The Beatles - Hey Jude</div>
+                <div>Queen Bohemian Rhapsody</div>
+                <div>- Nirvana, Smells Like Teen Spirit</div>
+              </Card>
+            </div>
+
+            <div>
+              <h3 className="text-2xl font-bold mb-4">
+                Export anywhere
+              </h3>
+              <p className="text-muted-foreground leading-relaxed mb-6">
+                Once created, export your playlist to Spotify, Apple Music, or share a link with friends.
+              </p>
+              <div className="flex gap-4">
+                <Card className="flex-1 p-4 text-center shadow-md">
+                  <div className="text-2xl mb-2">🎵</div>
+                  <div className="text-sm font-medium">Spotify</div>
+                </Card>
+                <Card className="flex-1 p-4 text-center shadow-md">
+                  <div className="text-2xl mb-2">🎶</div>
+                  <div className="text-sm font-medium">Apple Music</div>
+                </Card>
+                <Card className="flex-1 p-4 text-center shadow-md">
+                  <div className="text-2xl mb-2">🔗</div>
+                  <div className="text-sm font-medium">Share Link</div>
+                </Card>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* CTA */}
+        <div className="py-20 text-center">
+          <h2 className="text-4xl font-bold mb-6">
+            Stop wasting time on manual entry
+          </h2>
+          <p className="text-xl text-muted-foreground mb-10">
+            Create your first playlist in under 10 seconds.
+          </p>
+          <Link href="/signup">
+            <Button size="lg" className="shadow-xl">
+              Get started for free
+            </Button>
+          </Link>
         </div>
       </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
+
+      {/* Footer */}
+      <footer className="border-t mt-20">
+        <div className="max-w-6xl mx-auto px-8 py-8">
+          <p className="text-center text-muted-foreground text-sm">
+            Built with Next.js & Supabase
+          </p>
+        </div>
       </footer>
     </div>
-  );
+  )
 }
