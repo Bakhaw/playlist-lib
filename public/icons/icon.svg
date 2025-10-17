@@ -1,0 +1,15 @@
+<svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="512" height="512" rx="128" fill="#000000"/>
+  
+  <!-- Music Note Icon -->
+  <g transform="translate(140, 100)">
+    <path d="M120 40L120 230C120 252.091 102.091 270 80 270C57.9086 270 40 252.091 40 230C40 207.909 57.9086 190 80 190C90.3 190 99.7 193.9 107 200L107 40L200 20L200 210C200 232.091 182.091 250 160 250C137.909 250 120 232.091 120 210C120 187.909 137.909 170 160 170C170.3 170 179.7 173.9 187 180L187 77L120 90L120 40Z" 
+          fill="white" 
+          stroke="white" 
+          stroke-width="4" 
+          stroke-linecap="round" 
+          stroke-linejoin="round"/>
+  </g>
+</svg>
+

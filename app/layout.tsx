@@ -15,7 +15,27 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "Playlist Library - Your Music, Beautifully Organized",
-  description: "Create, manage, and share your playlists with ease. Built with Next.js and Supabase.",
+  description: "Transform your notes into playlists in seconds. The fastest way to create and manage music playlists.",
+  manifest: "/manifest.json",
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: "default",
+    title: "Playlist Library",
+  },
+  formatDetection: {
+    telephone: false,
+  },
+  openGraph: {
+    type: "website",
+    siteName: "Playlist Library",
+    title: "Playlist Library - Your Music, Beautifully Organized",
+    description: "Transform your notes into playlists in seconds.",
+  },
+  twitter: {
+    card: "summary",
+    title: "Playlist Library - Your Music, Beautifully Organized",
+    description: "Transform your notes into playlists in seconds.",
+  },
 };
 
 export default function RootLayout({
@@ -25,6 +45,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
+      <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+        <link rel="icon" href="/favicon.ico" />
+        <meta name="theme-color" content="#000000" />
+      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >

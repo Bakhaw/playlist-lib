@@ -13,7 +13,8 @@
 - **🧠 Smart Recognition** - AI-powered parsing supports any format: numbered lists, bullet points, plain text
 - **🎨 Beautiful UI** - Clean, minimalist design inspired by iTunes with full dark mode support
 - **🔐 Secure Authentication** - Email/password and Google OAuth via Supabase
-- **📱 Responsive Design** - Works seamlessly on desktop, tablet, and mobile
+- **📱 Progressive Web App** - Install on any device, works offline
+- **📲 Responsive Design** - Works seamlessly on desktop, tablet, and mobile
 - **🌓 Theme Support** - Light, dark, and system themes with smooth transitions
 - **🎯 Zero Learning Curve** - Just paste and go
 
