@@ -32,6 +32,7 @@ yarn-error.log*
 # local env files
 .env*.local
 .env
+!.env.local.example
 
 # vercel
 .vercel
@@ -48,3 +49,6 @@ next-env.d.ts
 /public/workbox-*.js
 /public/sw.js.map
 /public/workbox-*.js.map
+
+# Drizzle
+/drizzle
