@@ -48,6 +48,11 @@ export async function GET() {
     })
   } catch (error) {
     console.error('Error fetching stats:', error)
-    return NextResponse.json({ error: 'Failed to fetch stats' }, { status: 500 })
+    const errorMessage = error instanceof Error ? error.message : 'Unknown error'
+    console.error('Error details:', errorMessage)
+    return NextResponse.json({ 
+      error: 'Failed to fetch stats',
+      details: process.env.NODE_ENV === 'development' ? errorMessage : undefined
+    }, { status: 500 })
   }
 }
