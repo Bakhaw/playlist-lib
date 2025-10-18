@@ -14,25 +14,18 @@ export async function GET() {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
     }
 
-    console.log('Getting DB connection...')
     const db = getDb()
-    console.log('DB connection established, querying playlists...')
-    
     const userPlaylists = await db
       .select()
       .from(playlists)
       .where(eq(playlists.userId, user.id))
       .orderBy(desc(playlists.createdAt))
 
-    console.log('Playlists fetched:', userPlaylists.length)
     return NextResponse.json(userPlaylists)
   } catch (error) {
     console.error('Error fetching playlists:', error)
-    const errorMessage = error instanceof Error ? error.message : 'Unknown error'
-    console.error('Error details:', errorMessage)
     return NextResponse.json({ 
-      error: 'Failed to fetch playlists',
-      details: process.env.NODE_ENV === 'development' ? errorMessage : undefined
+      error: 'Failed to fetch playlists'
     }, { status: 500 })
   }
 }
@@ -83,10 +76,8 @@ export async function POST(request: NextRequest) {
     return NextResponse.json(newPlaylist, { status: 201 })
   } catch (error) {
     console.error('Error creating playlist:', error)
-    const errorMessage = error instanceof Error ? error.message : 'Failed to create playlist'
     return NextResponse.json({ 
-      error: 'Failed to create playlist',
-      details: process.env.NODE_ENV === 'development' ? errorMessage : undefined 
+      error: 'Failed to create playlist'
     }, { status: 500 })
   }
 }

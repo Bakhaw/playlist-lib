@@ -10,8 +10,7 @@ export function getDb() {
   const databaseUrl = process.env.DATABASE_URL
 
   if (!databaseUrl) {
-    console.error('DATABASE_URL environment variable is not set')
-    throw new Error('DATABASE_URL not found. Get it from Supabase Project Settings > Database > Connection String')
+    throw new Error('DATABASE_URL not found')
   }
 
   if (!global.postgresClient) {
