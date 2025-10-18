@@ -24,8 +24,8 @@ export function parsePlaylistText(text: string): ParsedSong[] {
     if (cleanedLine.includes(' - ')) {
       const parts = cleanedLine.split(' - ').map((p) => p.trim())
       if (parts.length >= 2) {
-        title = parts[0]
-        artist = parts.slice(1).join(' - ')
+        artist = parts[0]
+        title = parts.slice(1).join(' - ')
       }
     } else if (cleanedLine.toLowerCase().includes(' by ')) {
       const parts = cleanedLine.split(/\s+by\s+/i)
@@ -33,8 +33,8 @@ export function parsePlaylistText(text: string): ParsedSong[] {
       artist = parts.slice(1).join(' by ').trim()
     } else if (cleanedLine.includes(',')) {
       const parts = cleanedLine.split(',').map((p) => p.trim())
-      title = parts[0]
-      artist = parts.slice(1).join(', ')
+      artist = parts[0]
+      title = parts.slice(1).join(', ')
     } else {
       title = cleanedLine
       artist = null

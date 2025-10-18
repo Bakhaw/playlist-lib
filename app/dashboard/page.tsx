@@ -106,6 +106,20 @@ export default function DashboardPage() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
           {/* Input Section */}
           <div>
+            {/* Tips */}
+            <Card className="mb-6">
+              <CardContent className="pt-6">
+                <div className="text-sm font-semibold mb-3">
+                  💡 Pro tips
+                </div>
+                <ul className="space-y-2 text-sm text-muted-foreground">
+                  <li>• Format: Artist - Song name</li>
+                  <li>• Any format works (1., -, •, or plain)</li>
+                  <li>• Paste from Notes, Messages, anywhere</li>
+                </ul>
+              </CardContent>
+            </Card>
+
             <Card className="shadow-xl">
               <CardHeader>
                 <Label className="text-sm font-semibold">
@@ -125,7 +139,7 @@ export default function DashboardPage() {
                     Paste your playlist
                   </Label>
                   <Textarea
-                    placeholder="1. Blinding Lights - The Weeknd&#10;2. Levitating - Dua Lipa&#10;3. Save Your Tears - The Weeknd&#10;...or any format you have"
+                    placeholder="1. The Weeknd - Blinding Lights&#10;2. Dua Lipa - Levitating&#10;3. The Weeknd - Save Your Tears&#10;...or any format you have"
                     value={playlistText}
                     onChange={(e) => setPlaylistText(e.target.value)}
                     className="h-64 resize-none font-mono text-sm"
@@ -155,20 +169,6 @@ export default function DashboardPage() {
                 <div className="text-xs text-muted-foreground">
                   Supports any format • Numbers, bullets, or plain text
                 </div>
-              </CardContent>
-            </Card>
-
-            {/* Tips */}
-            <Card className="mt-6">
-              <CardContent className="pt-6">
-                <div className="text-sm font-semibold mb-3">
-                  💡 Pro tips
-                </div>
-                <ul className="space-y-2 text-sm text-muted-foreground">
-                  <li>• Include artist names for better accuracy</li>
-                  <li>• Any format works (1., -, •, or plain)</li>
-                  <li>• Paste from Notes, Messages, anywhere</li>
-                </ul>
               </CardContent>
             </Card>
           </div>
