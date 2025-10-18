@@ -6,10 +6,10 @@ import { eq } from 'drizzle-orm'
 // GET /api/playlists/share/[shareId] - Get a playlist by share ID (public)
 export async function GET(
   request: NextRequest,
-  { params }: { params: { shareId: string } }
+  { params }: { params: Promise<{ shareId: string }> }
 ) {
   try {
-    const { shareId } = params
+    const { shareId } = await params
 
     const db = getDb()
     const playlist = await db
@@ -31,4 +31,3 @@ export async function GET(
     return NextResponse.json({ error: 'Failed to fetch playlist' }, { status: 500 })
   }
 }
-
