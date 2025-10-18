@@ -74,6 +74,10 @@ export async function POST(request: NextRequest) {
     return NextResponse.json(newPlaylist, { status: 201 })
   } catch (error) {
     console.error('Error creating playlist:', error)
-    return NextResponse.json({ error: 'Failed to create playlist' }, { status: 500 })
+    const errorMessage = error instanceof Error ? error.message : 'Failed to create playlist'
+    return NextResponse.json({ 
+      error: 'Failed to create playlist',
+      details: process.env.NODE_ENV === 'development' ? errorMessage : undefined 
+    }, { status: 500 })
   }
 }
